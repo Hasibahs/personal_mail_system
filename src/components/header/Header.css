@@ -1,0 +1,20 @@
+.header {
+  height: 300px; /* Adjust height */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-text {
+  color: white;
+  text-align: center;
+  font-size: 2em;
+  position: absolute;
+  top: 70%; /* Adjust this value to move the text lower or higher */
+  transform: translateY(-50%); /* This ensures the text is centered relative to its height */
+  width: 100%;
+  padding: 0 20px;
+}
