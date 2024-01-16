@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
-
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'; // Default styling
 import './AvailabilityForm.css'; 
@@ -53,29 +52,21 @@ function AvailabilityForm() {
         {/*  Date Pickers for Start Date and End Date */}
 
         <div className="form-group">
-          <label htmlFor="start-date">Start Date:</label>
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            selectsStart
-            startDate={startDate}
-            endDate={endDate}
-            id="start-date"
-          />
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="end-date">End Date:</label>
-          <DatePicker
-            selected={endDate}
-            onChange={(date) => setEndDate(date)}
-            selectsEnd
-            startDate={startDate}
-            endDate={endDate}
-            minDate={startDate}
-            id="end-date"
-          />
-        </div>
+        <label>Start Date:</label>
+        <DatePicker 
+          selected={startDate}
+          onChange={date => setStartDate(date)}
+          dateFormat="dd/MM/yyyy"
+        />
+      </div>
+      <div className="form-group">
+        <label>End Date:</label>
+        <DatePicker 
+          selected={endDate}
+          onChange={date => setEndDate(date)}
+          dateFormat="dd/MM/yyyy"
+        />
+      </div>
         
         <div className="form-group">
           <label htmlFor="price">Price Per day:</label>

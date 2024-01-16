@@ -1,11 +1,67 @@
-
 .footer {
-    background-color: #222;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-  }
-  
+  background-color: #333; /* Your desired background color */
+  color: white; /* Your desired text color */
+  display: flex;
+  justify-content: space-between;
+  padding: 20px; /* Adjust padding as needed */
+  align-items: center;
+}
+
+.footer-newsletter,
+.footer-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-newsletter h4,
+.footer-links a {
+  margin-bottom: 10px;
+}
+
+.footer-links {
+  align-items: flex-end;
+}
+
+.footer-logo {
+  width: 150px; 
+  height: auto; 
+  margin-bottom: 20px; 
+}
+
+.footer-newsletter input[type="email"] {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+}
+
+.footer-newsletter button {
+  padding: 10px 20px;
+  background-color: #007bff; 
+  color: white;
+  border: none;
+  border-radius: 4px; /* Adjust border-radius as needed */
+  cursor: pointer;
+}
+
+.footer-links nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-links nav a {
+  color: white; /* Adjust link color as needed */
+  text-decoration: none;
+  margin-bottom: 5px; /* Adjust spacing as needed */
+}
+
+.footer-links img.footer-logo {
+  margin-bottom: 20px; /* Adjust spacing as needed */
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px; /* Adjust spacing as needed */
+  border-top: 1px solid #ccc; /* Adjust border as needed */
+  padding-top: 10px; /* Adjust padding as needed */
+}
