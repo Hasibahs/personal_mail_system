@@ -22,7 +22,6 @@ function Dashboard() {
 
     connectToDatabase((conn) => {
         performQueries(conn, (results) => {
-            // Now you can use the fetched results
             data.push(...results);
 
             console.log('Fetched data from the database: ');

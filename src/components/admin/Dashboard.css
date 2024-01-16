@@ -1,0 +1,23 @@
+.dashboard-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.dashboard-table th {
+    background-color: #f2f2f2;
+}
+
+.even-row {
+    background-color: #f9f9f9;
+}
+
+.odd-row {
+    background-color: #ffffff;
+}
