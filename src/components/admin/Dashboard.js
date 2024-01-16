@@ -3,7 +3,7 @@ import "./Dashboard.css";
 
 function Dashboard() {
 
-    function performQueries(conn) {
+    function performQueries(conn, callback) {
         const queryString = 'SELECT * FROM your_table';
 
         conn.query(queryString, (queryErr, results) => {
@@ -12,16 +12,23 @@ function Dashboard() {
                 return;
             }
 
-            console.log('Results of the query: ');
-            console.log(results);
+            callback(results);
         });
     }
 
 
-    const data = [
-        { startDate: '2023-01-01', endDate: '2023-01-05', roomType: 'Single', numOfRooms: 2, price: 100 },
-        { startDate: '2023-02-10', endDate: '2023-02-15', roomType: 'Double', numOfRooms: 1, price: 150 },
-    ];
+
+    const data = [];
+
+    connectToDatabase((conn) => {
+        performQueries(conn, (results) => {
+            // Now you can use the fetched results
+            data.push(...results);
+
+            console.log('Fetched data from the database: ');
+            console.log(data);
+        });
+    });
 
     return (
         <table className="dashboard-table">
