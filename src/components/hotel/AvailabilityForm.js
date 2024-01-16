@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import './AvailabilityForm.css';
+import roomIcon from './icons/room-icon.svg'; // Path to your room icon
+import availableIcon from './icons/available-icon.svg'; // Path to your available icon
+
 
 const AvailabilityForm = () => {
     const [roomType, setRoomType] = useState('Single Room');

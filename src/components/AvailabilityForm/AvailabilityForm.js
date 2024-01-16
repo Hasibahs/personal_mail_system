@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
+
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'; // Default styling
 import './AvailabilityForm.css'; 
-
+import { faHotel } from '@fortawesome/free-solid-svg-icons';
 function AvailabilityForm() {
   // State for the form fields
   const [roomType, setRoomType] = useState('Single Room');
@@ -19,30 +22,33 @@ function AvailabilityForm() {
   return (
     <div className="availability-form-container">
       <form onSubmit={handleSubmit} className="availability-form">
-        <h2>Select Availability</h2>
-        <div className="form-group">
-          <label htmlFor="room-type">Room Type</label>
-          <select
-            id="room-type"
-            value={roomType}
-            onChange={(e) => setRoomType(e.target.value)}
-          >
-            <option value="single">Single Room</option>
-            <option value="double">Double Room</option>
-            {/* Add more room types as needed */}
-          </select>
+        <div className="form-row">
+          <div className="input-group">
+          <FontAwesomeIcon icon={faHouse} />
+            <select
+              id="room-type"
+              value={roomType}
+              onChange={(e) => setRoomType(e.target.value)}
+            >
+              <option value="single">Single Room</option>
+              <option value="double">Double Room</option>
+              {/* ...other room types */}
+            </select>
+          </div>
+          
+          <div className="input-group">
+          <FontAwesomeIcon icon={faHotel} />
+            <input
+              type="number"
+              id="rooms-available"
+              min="1"
+              value={roomsAvailable}
+              onChange={(e) => setRoomsAvailable(e.target.value)}
+            />
+          </div>
         </div>
         
-        <div className="form-group">
-          <label htmlFor="rooms-available">Room Available</label>
-          <input
-            type="number"
-            id="rooms-available"
-            min="1"
-            value={roomsAvailable}
-            onChange={(e) => setRoomsAvailable(e.target.value)}
-          />
-        </div>
+        {/* ...other form elements */}
         
         {/*  Date Pickers for Start Date and End Date */}
 

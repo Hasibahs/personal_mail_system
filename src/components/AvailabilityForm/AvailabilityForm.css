@@ -6,42 +6,30 @@
     margin: 0 auto;
   }
   
-  .availability-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
-  .form-group {
-    margin-bottom: 15px;
+  .input-group {
+    display: flex;
+    align-items: center;
   }
   
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
+  .input-icon {
+    margin-right: 10px;
+    /* Adjust the size of the icon if necessary */
+    width: 24px;
+    height: 24px;
   }
   
-  .form-group select,
-  .form-group input {
-    width: 100%;
+  /* Style your select and input elements as needed */
+  select, input[type="number"] {
     padding: 10px;
-    margin-bottom: 10px;
+    margin-right: 20px; /* Adjust spacing between elements as needed */
     border: 1px solid #ccc;
     border-radius: 4px;
   }
   
-  .add-room-type-btn {
-    background-color: #ddd;
-    border: none;
-    padding: 10px 20px;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  .submit-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
   
