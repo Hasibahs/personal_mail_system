@@ -1,86 +1,157 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'; // Default styling
-import './AvailabilityForm.css'; 
-import { faHotel } from '@fortawesome/free-solid-svg-icons';
-function AvailabilityForm() {
-  // State for the form fields
-  const [roomType, setRoomType] = useState('Single Room');
-  const [roomsAvailable, setRoomsAvailable] = useState(1);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [price, setPrice] = useState('');
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse, faHotel } from "@fortawesome/free-solid-svg-icons";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import "../AvailabilityForm/AvailabilityForm.css";
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Logic to handle form submission
+function AvailabilityForm() {
+  const [availability, setAvailability] = useState([
+    {
+      roomType: "Single Room",
+      roomsAvailable: 1,
+      startDate: new Date(),
+      endDate: new Date(),
+      price: "",
+    },
+  ]);
+
+  const addRoomType = () => {
+    setAvailability([
+      ...availability,
+      {
+        roomType: "Single Room",
+        roomsAvailable: 1,
+        startDate: new Date(),
+        endDate: new Date(),
+        price: "",
+      },
+    ]);
   };
+
+  const handleRoomTypeChange = (index, event) => {
+    const updatedAvailability = [...availability];
+    updatedAvailability[index].roomType = event.target.value;
+    setAvailability(updatedAvailability);
+  };
+
+  const handleRoomsAvailableChange = (index, event) => {
+    const updatedAvailability = [...availability];
+    updatedAvailability[index].roomsAvailable = event.target.value;
+    setAvailability(updatedAvailability);
+  };
+
+  const handleStartDateChange = (index, date) => {
+    const updatedAvailability = [...availability];
+    updatedAvailability[index].startDate = date;
+    setAvailability(updatedAvailability);
+  };
+
+  const handleEndDateChange = (index, date) => {
+    const updatedAvailability = [...availability];
+    updatedAvailability[index].endDate = date;
+    setAvailability(updatedAvailability);
+  };
+
+  const handlePriceChange = (index, event) => {
+    const updatedAvailability = [...availability];
+    updatedAvailability[index].price = event.target.value;
+    setAvailability(updatedAvailability);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    // 'userId' will be replace with the actual ID from your authentication
+    const userId = 1;
+    // Transform the dates into 'YYYY-MM-DD' format
+    const transformedAvailability = availability.map((entry) => ({
+      ...entry,
+      startDate: formatDate(entry.startDate),
+      endDate: formatDate(entry.endDate),
+    }));
+
+    try {
+      const response = await fetch("http://localhost/fin/availability.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId, roomTypes: transformedAvailability }),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData.message);
+      } else {
+        const text = await response.text();
+        console.error("Failed to submit form. Response:", text);
+      }
+    } catch (error) {
+      console.error("There was an error submitting the form:", error);
+    }
+  };
+  // function to transform date to 'YYYY-MM-DD' format
+  function formatDate(date) {
+    return new Date(date).toISOString().split("T")[0];
+  }
 
   return (
     <div className="availability-form-container">
-      <form onSubmit={handleSubmit} className="availability-form">
-        <div className="form-row">
-          <div className="input-group">
-          <FontAwesomeIcon icon={faHouse} />
-            <select
-              id="room-type"
-              value={roomType}
-              onChange={(e) => setRoomType(e.target.value)}
-            >
-              <option value="single">Single Room</option>
-              <option value="double">Double Room</option>
-              {/* ...other room types */}
-            </select>
+      <form onSubmit={handleSubmit}>
+        <h2>Select Availability</h2>
+        {availability.map((entry, index) => (
+          <div key={index}>
+            <label>
+              Room Type:
+              <select
+                value={entry.roomType}
+                onChange={(e) => handleRoomTypeChange(index, e)}
+              >
+                <option value="Single Room">Single Room</option>
+                <option value="Double Room">Double Room</option>
+                {/* Add more room types */}
+              </select>
+            </label>
+            <label>
+              Rooms Available:
+              <input
+                type="number"
+                value={entry.roomsAvailable}
+                onChange={(e) => handleRoomsAvailableChange(index, e)}
+              />
+            </label>
+            <label>
+              Start Date:
+              <DatePicker
+                class="react-datepicker__input-container"
+                selected={entry.startDate}
+                onChange={(date) => handleStartDateChange(index, date)}
+              />
+            </label>
+            <label>
+              End Date:
+              <DatePicker
+                selected={entry.endDate}
+                onChange={(date) => handleEndDateChange(index, date)}
+              />
+            </label>
+            <label>
+              Price Per Day:
+              <input
+                type="text"
+                value={entry.price}
+                onChange={(e) => handlePriceChange(index, e)}
+              />
+            </label>
           </div>
-          
-          <div className="input-group">
-          <FontAwesomeIcon icon={faHotel} />
-            <input
-              type="number"
-              id="rooms-available"
-              min="1"
-              value={roomsAvailable}
-              onChange={(e) => setRoomsAvailable(e.target.value)}
-            />
-          </div>
-        </div>
-        
-        {/* ...other form elements */}
-        
-        {/*  Date Pickers for Start Date and End Date */}
-
-        <div className="form-group">
-        <label>Start Date:</label>
-        <DatePicker 
-          selected={startDate}
-          onChange={date => setStartDate(date)}
-          dateFormat="dd/MM/yyyy"
-        />
-      </div>
-      <div className="form-group">
-        <label>End Date:</label>
-        <DatePicker 
-          selected={endDate}
-          onChange={date => setEndDate(date)}
-          dateFormat="dd/MM/yyyy"
-        />
-      </div>
-        
-        <div className="form-group">
-          <label htmlFor="price">Price Per day:</label>
-          <input
-            type="number"
-            id="price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </div>
-        
-        <button type="button" className="add-room-type-btn">Add more Room Types +</button>
-        
-        <button type="submit" className="submit-btn">Submit</button>
+        ))}
+        <button type="button" class="add-room-type-btn" onClick={addRoomType}>
+          Add more Room Types
+        </button>
+        <button type="submit" class="submit-btn">
+          Submit
+        </button>
       </form>
     </div>
   );

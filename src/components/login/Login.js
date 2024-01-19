@@ -1,13 +1,40 @@
-import React, { useState } from 'react';
-import './Login.css'; // Create a corresponding CSS file for styling
+import React, { useState } from "react";
+import "./Login.css";
 
-function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+function Login({ onLoginSuccess, props, onGoToRegistration }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    // Here you would handle the login logic, potentially sending a request to your backend
+
+    // Send credentials to the backend
+    try {
+      const response = await fetch("http://localhost/fin/login.php", {
+        // need to Update with actual login endpoint
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const responseData = await response.json();
+
+      if (response.ok && responseData.success) {
+        onLoginSuccess();
+      } else {
+        setLoginError(responseData.message);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setLoginError("Failed to login.");
+    }
+  };
+
+  const handleRegistrationRedirect = () => {
+    window.location.href = "../registration/Registration";
   };
 
   return (
@@ -34,7 +61,14 @@ function Login() {
             required
           />
         </div>
-        <button type="submit" className="login-button">Login</button>
+        {loginError && <div className="login-error">{loginError}</div>}
+        <button type="submit" className="login-button">
+          Login
+        </button>
+
+        <button onClick={onGoToRegistration} className="register-button">
+          Register
+        </button>
       </form>
     </div>
   );
