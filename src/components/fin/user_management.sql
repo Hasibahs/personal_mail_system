@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 19, 2024 at 02:06 PM
+-- Generation Time: Jan 19, 2024 at 04:52 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -57,18 +57,20 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `hotel_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `hotel_name`, `email`, `password`) VALUES
-(1, 'hasib', 'hasib1@mail.com', '$2y$10$kVuoaeKWHfjM.8uyQPMcFOMAV/4fckGGor12MmNM07osZ60UKB.Bi'),
-(2, 'hasib1', 'hasib2@mail.com', '$2y$10$c6ljguNa0olYeQMTx8twFOXmfGuNLn1YFcRagiNF/rJKbb/llwIFG'),
-(3, 'hasib3', 'hasib2@mail.com', '$2y$10$TbXC86i2wfJcQVJB9vqQLOEEayYg4xq.gFKF7PbOA3O2AdSfJ61TO'),
-(4, 'Hotel Stenden', 'user1@mail.com', '$2y$10$SK56OYenBWTSyk1/zuOhJ.tLbrk1T6EABD0gvQaF7.2MZKv37L3zO');
+INSERT INTO `users` (`id`, `hotel_name`, `email`, `password`, `role`) VALUES
+(1, 'hasib', 'hasib1@mail.com', '$2y$10$kVuoaeKWHfjM.8uyQPMcFOMAV/4fckGGor12MmNM07osZ60UKB.Bi', 'user'),
+(2, 'hasib1', 'hasib2@mail.com', '$2y$10$c6ljguNa0olYeQMTx8twFOXmfGuNLn1YFcRagiNF/rJKbb/llwIFG', 'user'),
+(3, 'hasib3', 'hasib2@mail.com', '$2y$10$TbXC86i2wfJcQVJB9vqQLOEEayYg4xq.gFKF7PbOA3O2AdSfJ61TO', 'user'),
+(4, 'Hotel Stenden', 'user1@mail.com', '$2y$10$SK56OYenBWTSyk1/zuOhJ.tLbrk1T6EABD0gvQaF7.2MZKv37L3zO', 'user'),
+(5, 'Admin', 'admin@mail.com', '$2y$10$VA1quc1u0dwfKGFueluvXOdvfJMbhhW2Vl6Cyo4jk2Obc6957fYRK', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -101,7 +103,7 @@ ALTER TABLE `availability`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
