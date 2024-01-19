@@ -33,7 +33,12 @@ $result = $stmt->get_result();
 if ($user = $result->fetch_assoc()) {
     if (password_verify($password, $user['password'])) {
         // Successfully passwords match.
-        echo json_encode(["success" => true, "message" => "Login successful"]);
+        $response = ["success" => true, "message" => "Login successful"];
+        
+        // Include role information in the response
+        $response["role"] = $user['role'];
+        
+        echo json_encode($response);
     } else {
         // Invalid password
         echo json_encode(["success" => false, "message" => "Invalid password"]);
@@ -42,7 +47,6 @@ if ($user = $result->fetch_assoc()) {
     // No user found with that email address
     echo json_encode(["success" => false, "message" => "User not found"]);
 }
-
 
 $stmt->close();
 $conn->close();

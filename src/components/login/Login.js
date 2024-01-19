@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 
-function Login({ onLoginSuccess, props, onGoToRegistration }) {
+function Login({ onLoginSuccess, onGoToRegistration }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
@@ -12,7 +12,6 @@ function Login({ onLoginSuccess, props, onGoToRegistration }) {
     // Send credentials to the backend
     try {
       const response = await fetch("http://localhost/fin/login.php", {
-        // need to Update with actual login endpoint
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -23,7 +22,12 @@ function Login({ onLoginSuccess, props, onGoToRegistration }) {
       const responseData = await response.json();
 
       if (response.ok && responseData.success) {
-        onLoginSuccess();
+        // Redirect to the admin page if the user is an admin
+        if (responseData.isAdmin) {
+          window.location.href = "../admin/admin";
+        } else {
+          onLoginSuccess();
+        }
       } else {
         setLoginError(responseData.message);
       }

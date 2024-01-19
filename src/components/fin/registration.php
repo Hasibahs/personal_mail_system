@@ -27,12 +27,14 @@ if ($conn->connect_error) {
 $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 
-$stmt = $conn->prepare("INSERT INTO users (hotel_name, email, password) VALUES (?, ?, ?)");
+// Check if the 'role' field is set, if not, use 'user' as the default role
+$role = isset($data['role']) ? $data['role'] : 'user';
+
+$stmt = $conn->prepare("INSERT INTO users (hotel_name, email, password, role) VALUES (?, ?, ?, ?)");
 
 $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT); 
 
-$stmt->bind_param("sss", $data['hotelName'], $data['email'], $hashedPassword); 
-
+$stmt->bind_param("ssss", $data['hotelName'], $data['email'], $hashedPassword, $role); 
 
 if ($stmt->execute()) {
     echo json_encode(["message" => "User registered successfully"]);
