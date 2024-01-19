@@ -7,6 +7,7 @@ const Registration = ({ onGoToLogin, onRegistrationSuccess }) => {
   const [hotelName, setHotelName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("user"); // Default role is "user"
 
   const [hotelNameError, setHotelNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -16,7 +17,7 @@ const Registration = ({ onGoToLogin, onRegistrationSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted", { hotelName, email, password });
+    console.log("Form submitted", { hotelName, email, password, role });
 
     setHotelNameError(!hotelName);
     setEmailError(!email || !/\S+@\S+\.\S+/.test(email));
@@ -35,7 +36,7 @@ const Registration = ({ onGoToLogin, onRegistrationSuccess }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ hotelName, email, password }),
+          body: JSON.stringify({ hotelName, email, password, role }),
         });
 
         const responseData = await response.json();
@@ -56,6 +57,16 @@ const Registration = ({ onGoToLogin, onRegistrationSuccess }) => {
     <form className="registration-form" onSubmit={handleSubmit} noValidate>
       <div className={inputClassName(hotelNameError)}>
         <label htmlFor="hotelName">Enter your Hotel Name</label>
+
+        <label htmlFor="role">Select your Role:</label>
+        <select
+          id="role"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        >
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
         <input
           type="text"
           id="hotelName"
