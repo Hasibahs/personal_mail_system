@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 19, 2024 at 04:52 PM
+-- Generation Time: Jan 22, 2024 at 09:49 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -70,7 +70,8 @@ INSERT INTO `users` (`id`, `hotel_name`, `email`, `password`, `role`) VALUES
 (2, 'hasib1', 'hasib2@mail.com', '$2y$10$c6ljguNa0olYeQMTx8twFOXmfGuNLn1YFcRagiNF/rJKbb/llwIFG', 'user'),
 (3, 'hasib3', 'hasib2@mail.com', '$2y$10$TbXC86i2wfJcQVJB9vqQLOEEayYg4xq.gFKF7PbOA3O2AdSfJ61TO', 'user'),
 (4, 'Hotel Stenden', 'user1@mail.com', '$2y$10$SK56OYenBWTSyk1/zuOhJ.tLbrk1T6EABD0gvQaF7.2MZKv37L3zO', 'user'),
-(5, 'Admin', 'admin@mail.com', '$2y$10$VA1quc1u0dwfKGFueluvXOdvfJMbhhW2Vl6Cyo4jk2Obc6957fYRK', 'admin');
+(5, 'Admin', 'admin@mail.com', '$2y$10$VA1quc1u0dwfKGFueluvXOdvfJMbhhW2Vl6Cyo4jk2Obc6957fYRK', 'admin'),
+(6, 'Admin Hotel', 'admin1@mail.com', '$2y$10$0TTAEBoOyR5kFaZhFagHG.3tmKw58.gWuz5QcMOsGCZcIHsZzVRnG', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -103,7 +104,7 @@ ALTER TABLE `availability`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
