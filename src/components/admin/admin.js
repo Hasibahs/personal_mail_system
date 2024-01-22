@@ -1,27 +1,20 @@
 import React, { useState, useEffect } from "react";
-import "./Admin.css";
 
-function Admin() {
-  const [hotelData, setHotelData] = useState([]);
+function AdminPanel() {
+  const [hotelAvailabilityData, setHotelAvailabilityData] = useState([]);
 
   useEffect(() => {
-    const apiUrl = "http://localhost/fin/admin.php";
-
-    fetch(apiUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => setHotelData(data))
-      .catch((error) => console.error("Error fetching data:", error));
+    // Replace 'your-api-endpoint' with the endpoint from which you fetch hotel data
+    fetch("http://localhost/fin/admin.php")
+      .then((response) => response.json())
+      .then((data) => setHotelAvailabilityData(data))
+      .catch((error) => console.error("Fetch error:", error));
   }, []);
 
   return (
-    <div className="admin-panel">
-      <h2>Admin Panel</h2>
-      <table className="hotel-table">
+    <div className="admin-dashboard">
+      <h2>Hotel Availability Data</h2>
+      <table>
         <thead>
           <tr>
             <th>Id no</th>
@@ -34,15 +27,15 @@ function Admin() {
           </tr>
         </thead>
         <tbody>
-          {hotelData.map((hotel, index) => (
+          {hotelAvailabilityData.map((data, index) => (
             <tr key={index}>
-              <td>{hotel.id}</td>
-              <td>{hotel.hotel_name}</td>
-              <td>{hotel.room_type}</td>
-              <td>{hotel.rooms_available}</td>
-              <td>{hotel.start_date}</td>
-              <td>{hotel.end_date}</td>
-              <td>${hotel.price}</td>
+              <td>{data.id}</td>
+              <td>{data.hotel_name}</td>
+              <td>{data.room_type}</td>
+              <td>{data.rooms_available}</td>
+              <td>{data.start_date}</td>
+              <td>{data.end_date}</td>
+              <td>{data.price}</td>
             </tr>
           ))}
         </tbody>
@@ -51,4 +44,4 @@ function Admin() {
   );
 }
 
-export default Admin;
+export default AdminPanel;

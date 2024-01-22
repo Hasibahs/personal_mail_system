@@ -4,6 +4,7 @@ import { faHouse, faHotel } from "@fortawesome/free-solid-svg-icons";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../AvailabilityForm/AvailabilityForm.css";
+import { useNavigate } from "react-router-dom";
 
 function AvailabilityForm() {
   const [availability, setAvailability] = useState([
