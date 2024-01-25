@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./Registration.css";
 import App from "../../App";
 import Login from "../login/Login";
+import { useNavigate } from "react-router-dom";
 
-const Registration = ({ onGoToLogin, onRegistrationSuccess }) => {
+const Registration = ({ onRegistrationSuccess }) => {
   const [hotelName, setHotelName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,6 +13,8 @@ const Registration = ({ onGoToLogin, onRegistrationSuccess }) => {
   const [hotelNameError, setHotelNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+
+  const navigate = useNavigate();
 
   const inputClassName = (error) => `form-group ${error ? "input-error" : ""}`;
 
@@ -110,7 +113,11 @@ const Registration = ({ onGoToLogin, onRegistrationSuccess }) => {
       </div>
 
       <div className="form-actions">
-        <button type="button" onClick={onGoToLogin} className="btn-login">
+        <button
+          type="button"
+          onClick={() => navigate("/login")}
+          className="btn-login"
+        >
           Already Registered? Log in
         </button>
         <button type="submit" className="btn-register">
