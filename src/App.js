@@ -22,8 +22,8 @@ function App() {
           {/* Use 'Routes' instead of 'Switch' */}
           <Route path="/" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
-          <Route path="/availability" element={<AdminPanel />} />
-          <Route path="/admin-dashboard" element={<AdminPanel />} />
+          <Route path="/availability" element={<AvailabilityForm />} />
+          <Route path="/admin-panel" element={<AdminPanel />} />
           <Route path="*" element={<Navigate to="/" replace />} />{" "}
           {/* Replace 'Redirect' with 'Navigate' */}
         </Routes>

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2024 at 09:49 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Mar 27, 2024 at 12:25 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,7 +45,9 @@ INSERT INTO `availability` (`id`, `user_id`, `room_type`, `rooms_available`, `st
 (1, 1, 'Single Room', 1, '2024-01-19', '2024-01-20', 50.00),
 (2, 1, 'Single Room', 1, '2024-01-20', '2024-01-25', 50.00),
 (3, 1, 'Single Room', 1, '2024-01-20', '2024-01-25', 50.00),
-(4, 1, 'Double Room', 1, '2024-01-20', '2024-01-25', 60.00);
+(4, 1, 'Double Room', 1, '2024-01-20', '2024-01-25', 60.00),
+(5, 1, 'Single Room', 1, '2024-03-26', '2024-03-28', 0.00),
+(6, 1, 'Single Room', 1, '2024-03-26', '2024-03-28', 60.00);
 
 -- --------------------------------------------------------
 
@@ -71,7 +73,9 @@ INSERT INTO `users` (`id`, `hotel_name`, `email`, `password`, `role`) VALUES
 (3, 'hasib3', 'hasib2@mail.com', '$2y$10$TbXC86i2wfJcQVJB9vqQLOEEayYg4xq.gFKF7PbOA3O2AdSfJ61TO', 'user'),
 (4, 'Hotel Stenden', 'user1@mail.com', '$2y$10$SK56OYenBWTSyk1/zuOhJ.tLbrk1T6EABD0gvQaF7.2MZKv37L3zO', 'user'),
 (5, 'Admin', 'admin@mail.com', '$2y$10$VA1quc1u0dwfKGFueluvXOdvfJMbhhW2Vl6Cyo4jk2Obc6957fYRK', 'admin'),
-(6, 'Admin Hotel', 'admin1@mail.com', '$2y$10$0TTAEBoOyR5kFaZhFagHG.3tmKw58.gWuz5QcMOsGCZcIHsZzVRnG', 'admin');
+(6, 'Admin 2', 'admin2@mail.com', '$2y$10$K9z7EeCdqgnDPJyen5nzp.uim45QCDggmjGuqmOVPnBNEuH4ev1Gy', 'admin'),
+(7, 'user10', 'user10@mail.com', '$2y$10$i1Bkrw21i88P7HKcT2bzWeh00rBfaWgsHCTlvvQfOHUFIJ8Urltt6', 'user'),
+(8, 'Testing Hotel', 'test1@gmail.com', '$2y$10$0bL4OTENxIduwwTtMfi7f.wI6i8Tp4CZZjOOxjIBU5402ohitW3c.', 'user');
 
 --
 -- Indexes for dumped tables
@@ -98,13 +102,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `availability`
 --
 ALTER TABLE `availability`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

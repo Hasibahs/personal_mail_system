@@ -28,6 +28,7 @@ function Login() {
         const redirectPath = responseData.isAdmin
           ? "/admin-panel"
           : "/availability";
+
         console.log(`Redirecting to ${redirectPath}...`); // Confirm the redirect path
         navigate(redirectPath);
       } else {
