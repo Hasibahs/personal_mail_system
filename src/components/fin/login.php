@@ -31,13 +31,22 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($user = $result->fetch_assoc()) {
+    // Debug: Log the user role
+    error_log("User role: " . $user['role']);
+
     if (password_verify($password, $user['password'])) {
-        // Successfully passwords match.
-        $response = ["success" => true, "message" => "Login successful"];
-        
-        // Include role information in the response
-        $response["role"] = $user['role'];
-        
+        // Debug: Log that the password was verified
+        error_log("Password verified for user: " . $user['email']);
+
+        $response = [
+            "success" => true,
+            "message" => "Login successful",
+            "isAdmin" => $user['role'] === 'admin'
+        ];
+
+        // Debug: Log the isAdmin value
+        error_log("isAdmin: " . ($response["isAdmin"] ? "true" : "false"));
+
         echo json_encode($response);
     } else {
         // Invalid password

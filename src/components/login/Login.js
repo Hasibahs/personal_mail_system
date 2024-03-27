@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import "./Login.css";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Login({ onLoginSuccess, onGoToRegistration }) {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -22,24 +25,23 @@ function Login({ onLoginSuccess, onGoToRegistration }) {
       const responseData = await response.json();
 
       if (response.ok && responseData.success) {
-        // Redirect to the admin page if the user is an admin
-        if (responseData.isAdmin) {
-          window.location.href = "../admin/admin";
-        } else {
-          onLoginSuccess();
-        }
+        const redirectPath = responseData.isAdmin
+          ? "/admin-panel"
+          : "/availability";
+
+        console.log(`Redirecting to ${redirectPath}...`); // Confirm the redirect path
+        navigate(redirectPath);
       } else {
-        setLoginError(responseData.message);
+        setLoginError(
+          responseData.message || "Login failed with unknown error."
+        );
       }
     } catch (error) {
       console.error("Login error:", error);
-      setLoginError("Failed to login.");
+      setLoginError(error.message || "Failed to login.");
     }
   };
-
-  const handleRegistrationRedirect = () => {
-    window.location.href = "../registration/Registration";
-  };
+  // Redirection for registration not handled here, should be handled via Link or history.push
 
   return (
     <div className="login-container">
@@ -70,9 +72,9 @@ function Login({ onLoginSuccess, onGoToRegistration }) {
           Login
         </button>
 
-        <button onClick={onGoToRegistration} className="register-button">
+        <Link to="/registration" className="register-button">
           Register
-        </button>
+        </Link>
       </form>
     </div>
   );
